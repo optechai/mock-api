@@ -15,6 +15,15 @@ app.get('/api/user', function (req, res) {
     res.send(response)
 })
 
+app.post('/api/card/replace', function (req, res) {
+    console.log("-------- POST /card/replace --------")
+    console.log("request headers", req.headers)
+    console.log("request body", util.inspect(req.body, false, null, true /* enable colors */))
+    const response = { success: true }
+    console.log("response body", util.inspect(response, false, null, true /* enable colors */))
+    res.send(response)
+})
+
 app.post('/api/user', function (req, res) {
     console.log("-------- POST /user --------")
     console.log("request headers", req.headers)
@@ -66,5 +75,5 @@ app.post('/api/user', function (req, res) {
 // })
 
 
-// app.listen(4001)
-module.exports = app
+app.listen(4001)
+// module.exports = app
