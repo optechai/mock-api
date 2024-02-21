@@ -9,7 +9,7 @@ app.get('/api/user', function (req, res) {
     console.log("-------- GET /user --------")
     console.log("request headers", req.headers)
     const response = {
-        "shippingAddress": "123 Abc St, Sydney"
+        "shippingAddress": "120 Hawthorne Avenue, Palo Alto, CA 94301"
     }
     console.log("response body", util.inspect(response, false, null, true /* enable colors */))
     res.send(response)
