@@ -34,9 +34,9 @@ app.post('/api/user', function (req, res) {
 })
 
 
-app.get('/auth/profile', function (req, res) {
+app.get('/api/profile', function (req, res) {
     console.log("")
-    console.log("-------- GET /auth/profile --------")
+    console.log("-------- GET /profile --------")
     console.log("request headers", req.headers)
     const response = {
         "profile": {
@@ -75,5 +75,5 @@ app.get('/auth/profile', function (req, res) {
 // })
 
 
-app.listen(4001)
-// module.exports = app
+// app.listen(4001)
+module.exports = app
