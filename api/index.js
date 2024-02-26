@@ -54,6 +54,8 @@ app.get('/api/user/appointments', function (req, res) {
             },
         ]
     }
+    console.log("response body", util.inspect(response, false, null, true /* enable colors */))
+    res.send(response)
 })
 
 app.post('/api/appointments', function (req, res) {
