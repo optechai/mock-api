@@ -1,6 +1,11 @@
 const express = require('express')
 const app = express()
 const util = require('util')
+const accounts = require('./accounts')
+const cards1 = require('./cards-1')
+const cards2 = require('./cards-2')
+const cardReplaced = require('./card-replaced')
+const user = require('./user')
 
 app.use(express.json()); // for parsing application/json
 
@@ -8,9 +13,17 @@ app.get('/api/user', function (req, res) {
     console.log("")
     console.log("-------- GET /user --------")
     console.log("request headers", req.headers)
-    const response = {
-        "shippingAddress": "120 Hawthorne Avenue, Palo Alto, CA 94301"
-    }
+    const response = user
+    console.log("response body", util.inspect(response, false, null, true /* enable colors */))
+    res.send(response)
+})
+
+
+app.post('/api/user/shipping-address', function (req, res) {
+    console.log(`-------- POST /user/shipping-address --------`)
+    console.log("request headers", req.headers)
+    console.log("request body", util.inspect(req.body, false, null, true /* enable colors */))
+    const response = { success: true }
     console.log("response body", util.inspect(response, false, null, true /* enable colors */))
     res.send(response)
 })
@@ -125,6 +138,38 @@ app.get('/api/profile', function (req, res) {
 //     console.log("response body", util.inspect(response, false, null, true /* enable colors */))
 //     res.send(response)
 // })
+
+
+app.get('/api/account', function (req, res) {
+    console.log("")
+    console.log("-------- GET /account --------")
+    console.log("request headers", req.headers)
+    const response = accounts
+    console.log("response body", util.inspect(response, false, null, true /* enable colors */))
+    res.send(response)
+})
+
+app.get('/api/account/:primaryAccountId/card', function (req, res) {
+    const primaryAccountId = req.params.primaryAccountId
+    console.log("")
+    console.log(`-------- GET /account/${primaryAccountId}/card --------`)
+    console.log("request headers", req.headers)
+    const response = primaryAccountId === 'account-0001' ? cards1 : cards2
+    console.log("response body", util.inspect(response, false, null, true /* enable colors */))
+    res.send(response)
+})
+
+app.post('/api/card/:cardId/replace/shipping', function (req, res) {
+    const cardId = req.params.cardId
+    console.log(`-------- POST /card/${cardId}/replace/shipping --------`)
+    console.log("request headers", req.headers)
+    console.log("request body", util.inspect(req.body, false, null, true /* enable colors */))
+    const response = cardReplaced
+    console.log("response body", util.inspect(response, false, null, true /* enable colors */))
+    res.send(response)
+})
+
+
 
 
 // app.listen(4001)
