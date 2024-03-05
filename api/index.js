@@ -5,7 +5,6 @@ const accounts = require("./accounts");
 const cards1 = require("./cards-1");
 const cards2 = require("./cards-2");
 const cardReplaced = require("./card-replaced");
-const user = require("./user");
 const userTier = require("./tier");
 
 app.use(express.json()); // for parsing application/json
@@ -14,7 +13,56 @@ app.get("/api/user", function (req, res) {
     console.log("");
     console.log("-------- GET /user --------");
     console.log("request headers", req.headers);
-    const response = user;
+    const response = {
+        "user": {
+            "address": {
+                "city": "string",
+                "country": "string",
+                "line1": "string",
+                "line2": "string",
+                "location": {
+                    "latitude": 0,
+                    "longitude": 0
+                },
+                "state_province_region": "string",
+                "zip_postal_code": "string"
+            },
+            "auto_billing": true,
+            "created_at_ms": "string",
+            "dob": "string",
+            "id": "string",
+            "kyc_errors": [
+                "INVALID_ERROR"
+            ],
+            "kyc_status": "INVALID",
+            "legal_name": {
+                "first_name": "string",
+                "last_name": "string"
+            },
+            "monitor_credit": true,
+            "nickname": "string",
+            "picture_url": "string",
+            "report_credit": true,
+            "shipping": {
+                "address": {
+                    "city": "Palo Alto",
+                    "country": "United States",
+                    "line1": "120 Hawthorne Ave",
+                    "line2": "",
+                    "location": {
+                        "latitude": 0,
+                        "longitude": 0
+                    },
+                    "stateProvinceRegion": "CA",
+                    "zip_postal_code": "94301"
+                },
+                "is_confirmed": true,
+                "is_validated": true
+            },
+            "ssn_on_file": "INVALID_SSN_ON_FILE",
+            "updated_at_ms": "string"
+        }
+    };
     console.log(
         "response body",
         util.inspect(response, false, null, true /* enable colors */)
@@ -230,5 +278,5 @@ app.post("/api/card/:cardId/replace/shipping", function (req, res) {
     res.send(response);
 });
 
-// app.listen(4001);
-module.exports = app
+app.listen(4001);
+// module.exports = app
