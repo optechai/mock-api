@@ -99,21 +99,21 @@ const cards = {
             "replacement_reason": "INVALID_CARD_REPLACEMENT_REASON",
             "shipping": {
                 "address": {
-                    "city": "string",
-                    "country": "string",
-                    "line1": "string",
-                    "line2": "string",
+                    "city": "Palo Alto",
+                    "country": "United States",
+                    "line1": "120 Hawthorne Ave",
+                    "line2": "",
                     "location": {
                         "latitude": 0,
                         "longitude": 0
                     },
-                    "state_province_region": "string",
-                    "zip_postal_code": "string"
+                    "stateProvinceRegion": "CA",
+                    "zipPostalCode": "94301"
                 },
                 "carrier": "string",
                 "eta_ms": "string",
                 "service": "INVALID_SHIPMENT_SERVICE",
-                "status": "INVALID_CARD_SHIPPING_STATUS",
+                "status": "DELIVERED",
                 "tracking_number": "string",
                 "tracking_url": "string"
             },

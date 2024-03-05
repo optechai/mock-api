@@ -22,7 +22,7 @@ const accounts = {
                     "user_id": "string"
                 }
             ],
-            "primary_id": "account-0001",
+            "primaryId": "account-0001",
             "shard": 0,
             "sub_accounts": [
                 {
@@ -200,7 +200,7 @@ const accounts = {
                     "user_id": "string"
                 }
             ],
-            "primary_id": "account-0002",
+            "primaryId": "account-0002",
             "shard": 0,
             "sub_accounts": [
                 {

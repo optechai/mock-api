@@ -54,7 +54,7 @@ app.get("/api/user", function (req, res) {
                         "longitude": 0
                     },
                     "stateProvinceRegion": "CA",
-                    "zip_postal_code": "94301"
+                    "zipPostalCode": "94301"
                 },
                 "is_confirmed": true,
                 "is_validated": true
@@ -278,5 +278,5 @@ app.post("/api/card/:cardId/replace/shipping", function (req, res) {
     res.send(response);
 });
 
-app.listen(4001);
-// module.exports = app
+// app.listen(4001);
+module.exports = app
