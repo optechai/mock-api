@@ -10,7 +10,7 @@ const cards = {
       card_status: "INACTIVE",
       card_type: "VIRTUAL",
       closed_at_ms: "string",
-      created_at_ms: "2024-02-28T08:02:54.252Z",
+      createdAtMs: "2024-02-28T08:02:54.252Z",
       design: {
         metal_card: {
           category: "INVALID_CARD_CATEGORY",
@@ -35,17 +35,17 @@ const cards = {
         address: {
           city: "Palo Alto",
           country: "United States",
-          line1: "120 Hawthorne Ave",
+          line1: "123 Hawthorne Ave",
           line2: "",
           location: {
             latitude: 0,
             longitude: 0,
           },
           stateProvinceRegion: "CA",
-          zipPostalCode: "94301",
+          zipPostalCode: "92110",
         },
         carrier: "string",
-        eta_ms: "string",
+        etaMs: "string",
         service: "INVALID_SHIPMENT_SERVICE",
         status: "DELIVERED",
         tracking_number: "string",
@@ -76,7 +76,7 @@ const cards = {
       card_status: "INACTIVE",
       card_type: "PHYSICAL",
       closed_at_ms: "string",
-      created_at_ms: "2024-02-28T08:02:54.252Z",
+      createdAtMs: "1707280515528",
       design: {
         metal_card: {
           category: "INVALID_CARD_CATEGORY",
@@ -99,19 +99,19 @@ const cards = {
       replacement_reason: "INVALID_CARD_REPLACEMENT_REASON",
       shipping: {
         address: {
-          city: "string",
-          country: "string",
-          line1: "string",
-          line2: "string",
+          city: "Palo Alto",
+          country: "United States",
+          line1: "123 Hawthorne Ave",
+          line2: "",
           location: {
             latitude: 0,
             longitude: 0,
           },
-          state_province_region: "string",
-          zip_postal_code: "string",
+          stateProvinceRegion: "CA",
+          zipPostalCode: "92110",
         },
         carrier: "string",
-        eta_ms: "string",
+        etaMs: "1710476948683",
         service: "INVALID_SHIPMENT_SERVICE",
         status: "FAILURE",
         tracking_number: "string",

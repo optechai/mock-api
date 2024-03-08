@@ -10,7 +10,7 @@ const cards = {
       card_status: "ACTIVE_WALLET_ONLY",
       card_type: "PHYSICAL",
       closed_at_ms: "string",
-      created_at_ms: "2024-02-21T10:01:34.100Z",
+      createdAtMs: "2024-02-21T10:01:34.100Z",
       design: {
         metal_card: {
           category: "INVALID_CARD_CATEGORY",
@@ -45,7 +45,7 @@ const cards = {
           zip_postal_code: "string",
         },
         carrier: "string",
-        eta_ms: "string",
+        etaMs: "string",
         service: "INVALID_SHIPMENT_SERVICE",
         status: "DELIVERED",
         tracking_number: "string",
@@ -76,7 +76,7 @@ const cards = {
       card_status: "CANCELED",
       card_type: "PHYSICAL",
       closed_at_ms: "string",
-      created_at_ms: "2024-02-28T08:02:54.252Z",
+      createdAtMs: "2024-02-28T08:02:54.252Z",
       design: {
         metal_card: {
           category: "INVALID_CARD_CATEGORY",
@@ -111,7 +111,7 @@ const cards = {
           zipPostalCode: "94301",
         },
         carrier: "string",
-        eta_ms: "string",
+        etaMs: "string",
         service: "INVALID_SHIPMENT_SERVICE",
         status: "DELIVERED",
         tracking_number: "string",
