@@ -53,11 +53,11 @@ const result = {
         },
       },
     },
-    type: "BLACK",
+    type: "NORMAL",
   },
   type_changed: {
     at_ms: "string",
-    from: "BLACK",
+    from: "NORMAL",
   },
 };
 
