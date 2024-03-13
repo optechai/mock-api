@@ -9,6 +9,87 @@ const userTier = require("./tier");
 
 app.use(express.json()); // for parsing application/json
 
+app.get("/api/user/transactions", function (req, res) {
+  console.log("");
+  console.log("-------- GET /user/transactions --------");
+  console.log("request headers", req.headers);
+  // Make some relevant dates
+  const dateOne = new Date();
+  dateOne.setDate(dateTwo.getDate() - 1);
+  dateOne.setHours(11, 0, 0, 0);
+  const dateTwo = new Date();
+  dateTwo.setDate(dateTwo.getDate() - 1);
+  dateTwo.setHours(12, 0, 0, 0);
+  const dateThree = new Date();
+  dateThree.setDate(dateTwo.getDate() - 2);
+  dateThree.setHours(8, 0, 0, 0);
+  const response = {
+    transactions: [
+      {
+        date: dateOne,
+        merchant: "Legitimate Business, Inc",
+        amount: "$100.00",
+      },
+      {
+        date: dateTwo,
+        merchant: "Shady's iTunes Gift Card Shop",
+        amount: "$420.00",
+      },
+      {
+        date: dateThree,
+        merchant: "Lucky's Lunch Laboratory",
+        amount: "$24.71",
+      }
+    ]
+  }
+})
+
+app.post("/api/disputes/submit", function (req, res) {
+  console.log(`-------- POST /disputes/submit --------`);
+  console.log("request headers", req.headers);
+  console.log(
+    "request body",
+    util.inspect(req.body, false, null, true /* enable colors */)
+  );
+  const response = { success: true };
+  console.log(
+    "response body",
+    util.inspect(response, false, null, true /* enable colors */)
+  );
+  res.send(response);
+});
+
+app.get("/api/user/email", function (req, res) {
+  console.log("");
+  console.log("-------- GET /user --------");
+  console.log("request headers", req.headers);
+  const response = {
+    user: {
+      email_address: "the_disputer@gmail.com"
+    },
+  };
+  console.log(
+    "response body",
+    util.inspect(response, false, null, true /* enable colors */)
+  );
+  res.send(response);
+});
+
+app.post("/api/user/email", function (req, res) {
+  console.log(`-------- POST /user/email --------`);
+  console.log("request headers", req.headers);
+  console.log(
+    "request body",
+    util.inspect(req.body, false, null, true /* enable colors */)
+  );
+  const response = { success: true };
+  console.log(
+    "response body",
+    util.inspect(response, false, null, true /* enable colors */)
+  );
+  res.send(response);
+});
+
 app.get("/api/user", function (req, res) {
   console.log("");
   console.log("-------- GET /user --------");
