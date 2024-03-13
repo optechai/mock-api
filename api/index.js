@@ -13,6 +13,20 @@ app.get('/api/user/transactions', function (req, res) {
   console.log('');
   console.log('-------- GET /user/transactions --------');
   console.log('request headers', req.headers);
+  // Generate dates
+  // Date one
+  const dateOne = new Date();
+  dateOne.setDate(dateOne.getDate() - 1);
+  dateOne.setHours(9, 0, 0, 0);
+  // Date two
+  const dateTwo = new Date();
+  dateTwo.setDate(dateTwo.getDate() - 1);
+  dateTwo.setHours(11, 0, 0, 0);
+  // Date three
+  const dateThree = new Date();
+  dateThree.setDate(dateThree.getDate() - 2);
+  dateThree.setHours(6, 0, 0, 0);
+
   const response = {
     transactions: [
       {
