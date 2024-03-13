@@ -42,6 +42,7 @@ app.get("/api/user/transactions", function (req, res) {
       }
     ]
   }
+  res.send(response);
 })
 
 app.post("/api/disputes/submit", function (req, res) {
