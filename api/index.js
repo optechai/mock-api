@@ -276,5 +276,5 @@ app.post("/api/card/:cardId/replace/shipping", function (req, res) {
   res.send(response);
 });
 
-app.listen(4001);
-// module.exports = app
+// app.listen(4001);
+module.exports = app;
