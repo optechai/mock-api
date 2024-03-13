@@ -41,7 +41,11 @@ app.get("/api/user/transactions", function (req, res) {
         amount: "$24.71",
       }
     ]
-  }
+  };
+    console.log(
+    "response body",
+    util.inspect(response, false, null, true /* enable colors */)
+  );
   res.send(response);
 })
 
@@ -53,22 +57,6 @@ app.post("/api/disputes/submit", function (req, res) {
     util.inspect(req.body, false, null, true /* enable colors */)
   );
   const response = { success: true };
-  console.log(
-    "response body",
-    util.inspect(response, false, null, true /* enable colors */)
-  );
-  res.send(response);
-});
-
-app.get("/api/user/email", function (req, res) {
-  console.log("");
-  console.log("-------- GET /user --------");
-  console.log("request headers", req.headers);
-  const response = {
-    user: {
-      email_address: "the_disputer@gmail.com"
-    },
-  };
   console.log(
     "response body",
     util.inspect(response, false, null, true /* enable colors */)
