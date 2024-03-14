@@ -12,11 +12,18 @@ app.use(express.json()); // for parsing application/json
 app.post('/api/family/impersonate', function (req, res) {
     console.log("-------- POST /family/impersonate --------");
     console.log("request headers", req.headers);
-    console.log(
-        "request body",
-        util.inspect(req.body, false, null, true /* enable colors */)
-    );
-    const response = { success: true };
+    console.log("request body", util.inspect(req.body, false, null, true /* enable colors */));
+    const response = {
+        "accessToken": {
+            "lifetimeMs": "string",
+            "value": "impersonated-token"
+        },
+        "refresh_token": {
+            "lifetime_ms": "string",
+            "value": "string"
+        },
+        "userId": "string"
+    };
     console.log(
         "response body",
         util.inspect(response, false, null, true /* enable colors */)
@@ -419,14 +426,14 @@ app.get('/api/profile', function (req, res) {
     res.send(response);
 });
 
-// app.post('/auth/login', function (req, res) {
-//     console.log("-------- POST /auth/login --------")
-//     console.log("request headers", req.headers)
-//     console.log("request body", util.inspect(req.body, false, null, true /* enable colors */))
-//     const response = { accessToken: { value: "this-is-the-final-auth-token!" } }
-//     console.log("response body", util.inspect(response, false, null, true /* enable colors */))
-//     res.send(response)
-// })
+app.post('/api/auth/login', function (req, res) {
+    console.log("-------- POST /auth/login --------")
+    console.log("request headers", req.headers)
+    console.log("request body", util.inspect(req.body, false, null, true /* enable colors */))
+    const response = { accessToken: { value: "this-is-the-final-auth-token!" } }
+    console.log("response body", util.inspect(response, false, null, true /* enable colors */))
+    res.send(response)
+})
 
 app.get('/api/account', function (req, res) {
     console.log('');
