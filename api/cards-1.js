@@ -10,7 +10,7 @@ const cards = {
       card_status: "ACTIVE_WALLET_ONLY",
       card_type: "PHYSICAL",
       closed_at_ms: "string",
-      createdAtMs: "2024-02-21T10:01:34.100Z",
+      createdAtMs: "1708509694100",
       design: {
         metal_card: {
           category: "INVALID_CARD_CATEGORY",
@@ -76,7 +76,7 @@ const cards = {
       card_status: "CANCELED",
       card_type: "PHYSICAL",
       closed_at_ms: "string",
-      createdAtMs: "2024-02-28T08:02:54.252Z",
+      createdAtMs: "1709107374252",
       design: {
         metal_card: {
           category: "INVALID_CARD_CATEGORY",
