@@ -9,7 +9,7 @@ const userTier = require('./tier');
 
 app.use(express.json()); // for parsing application/json
 
-app.post('/family/impersonate', function (req, res) {
+app.post('/api/family/impersonate', function (req, res) {
     console.log("-------- POST /family/impersonate --------");
     console.log("request headers", req.headers);
     console.log("request body", util.inspect(req.body, false, null, true /* enable colors */));
