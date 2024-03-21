@@ -1,8 +1,7 @@
 {
-  "name": "hello-express",
+  "name": "optech-express-template",
   "version": "1.0.0",
-  "type": "module",
-  "description": "",
+  "description": "Express API integration demo for Optech",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch api/index.ts",

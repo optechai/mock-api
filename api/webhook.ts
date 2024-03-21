@@ -7,19 +7,20 @@ import crypto from 'crypto'
 const router = express.Router()
 
 const WEBHOOK_HEADER_NAME = 'x-optech-webhook-signature'
-const OPTECH_SHARED_SECRET = process.env.OPTECH_SHARED_SECRET || 'YOUR_WEBHOOK_SIGNATURE_KEY'
+const OPTECH_SHARED_SECRET =
+  process.env.OPTECH_SHARED_SECRET || 'YOUR_WEBHOOK_SIGNATURE_KEY'
 const CLIENT_ID = process.env.OPTECH_CLIENT_ID || 'opt_acb1234'
 
 /**
  * Use this to decode / validate the signature provided in the header
- * 
+ *
  * Generate a signature for the payload
  * @param payload - the payload to sign
  * @param secret - the secret to use to sign the payload
  * @returns the signature
  */
 function generateSignature(payload: string, secret: string) {
-    // Replace special characters with Unicode escape sequences
+  // Replace special characters with Unicode escape sequences
   const modifiedRequestBody = payload.replace(/’/g, '\\u2019')
   return crypto
     .createHmac('sha256', secret)
@@ -34,7 +35,7 @@ interface ProblemJSON {
   status: number
   /** */
   type: string
-  /** The HTTP error title */ 
+  /** The HTTP error title */
   title: string
   /** A human-readable explanation specific to this occurrence of the problem */
   detail: string
@@ -46,38 +47,50 @@ router.use((req, res, next) => {
   console.log(req.headers)
 
   if (req.method === 'GET') {
-    res.status(405).header('Content-Type', 'application/problem+json').send({
-      status: 405,
-      type: 'about:blank',
-      title: 'Method not allowed',
-      detail: 'The request method is not allowed',
-    } satisfies ProblemJSON)
+    res
+      .status(405)
+      .header('Content-Type', 'application/problem+json')
+      .send({
+        status: 405,
+        type: 'about:blank',
+        title: 'Method not allowed',
+        detail: 'The request method is not allowed',
+      } satisfies ProblemJSON)
     return
   }
-
 
   console.log('-------- Authenticating --------')
   if (!rawRequestBody) {
-    res.status(400).header('Content-Type', 'application/problem+json').send({
-      status: 400,
-      type: 'about:blank',
-      title: 'Bad request',
-      detail: 'The request body is empty',
-    } satisfies ProblemJSON)
+    res
+      .status(400)
+      .header('Content-Type', 'application/problem+json')
+      .send({
+        status: 400,
+        type: 'about:blank',
+        title: 'Bad request',
+        detail: 'The request body is empty',
+      } satisfies ProblemJSON)
     return
   }
 
-  const signature = generateSignature(rawRequestBody,OPTECH_SHARED_SECRET)
+  const signature = generateSignature(rawRequestBody, OPTECH_SHARED_SECRET)
   const isValid = signature === req.headers[WEBHOOK_HEADER_NAME]
 
   if (!isValid) {
-    console.log('invalid signature', signature, req.headers[WEBHOOK_HEADER_NAME])
-    res.status(403).header('Content-Type', 'application/problem+json').send({
-      status: 403,
-      type: 'about:blank',
-      title: 'Forbidden',
-      detail: 'The request signature is invalid',
-    } satisfies ProblemJSON)
+    console.log(
+      'invalid signature',
+      signature,
+      req.headers[WEBHOOK_HEADER_NAME],
+    )
+    res
+      .status(403)
+      .header('Content-Type', 'application/problem+json')
+      .send({
+        status: 403,
+        type: 'about:blank',
+        title: 'Forbidden',
+        detail: 'The request signature is invalid',
+      } satisfies ProblemJSON)
     return
   }
 
@@ -130,7 +143,7 @@ router.post('/push', (req, res) => {
         userId: 'some-user-id',
         data,
       })
-      const signature = generateSignature(body,OPTECH_SHARED_SECRET)
+      const signature = generateSignature(body, OPTECH_SHARED_SECRET)
       await fetch(link, {
         method: 'POST',
         headers: {
@@ -139,7 +152,7 @@ router.post('/push', (req, res) => {
           authorization: `Basic ${CLIENT_ID}`,
           [WEBHOOK_HEADER_NAME]: signature,
         },
-        body
+        body,
       })
     } catch (error) {
       console.error(error)
@@ -167,7 +180,7 @@ router.post('/push', (req, res) => {
  * ```
  */
 router.post('/push_immediate', (req, res) => {
-  console.log('-------- POST /webhook/push --------')
+  console.log('-------- POST /webhook/push_immediate --------')
   console.log('request headers', req.headers)
   console.log('request body', req.body)
 
@@ -180,9 +193,14 @@ router.post('/push_immediate', (req, res) => {
     data,
   })
 
-  const signature = generateSignature(body,OPTECH_SHARED_SECRET)
+  const signature = generateSignature(body, OPTECH_SHARED_SECRET)
 
-  res.status(200).header('Content-Type', 'application/json').header('authorization', CLIENT_ID).header(WEBHOOK_HEADER_NAME, signature).send(body)
+  res
+    .status(200)
+    .header('Content-Type', 'application/json')
+    .header('authorization', CLIENT_ID)
+    .header(WEBHOOK_HEADER_NAME, signature)
+    .send(body)
 })
 
 export default router
