@@ -369,7 +369,7 @@ app.post('/api/card/:cardId/replace/shipping', function (req, res) {
   res.send(response)
 })
 
-app.use('/api/subscribe', webhookRoute)
+app.use('/api/push', webhookRoute)
 
 const port = process.env.PORT || 4000
 
