@@ -19,9 +19,11 @@ Our API is available at [https://api.optech.ai/ingest](https://api.optech.ai/ing
 To allow this you'll need to configure a single endpoint on a server you own. This endpoint will be used to receive data requests from the OpTech platform. There is no requirement on
 path format, but the request will always be a `POST` request with a `JSON` body as follows.
 
-```json
+```javascript
 {
+  // the unique url to return the data to - only valid for 10 minutes after the request / and relevant if using an async flow
   "link": "https://api.optech.ai/ingest/<id>",
+  // data requests from the OpTech platform
   "data": {
     "key": "value"
   }
@@ -31,7 +33,8 @@ path format, but the request will always be a `POST` request with a `JSON` body 
 The request will also have the following headers:
 
 ```http
-
+x-optech-signature: <signature> // verify the request is from OpTech
+content-type: application/json // the content type of the request
 ```
 
 You should respond to this request with a JSON object containing the data you wish to send back to the OpTech platform. The format of this response should be as follows:
@@ -44,8 +47,8 @@ You should respond to this request with a JSON object containing the data you wi
 }
 ```
 
-You can respond immediately with a body response or you can respond with a `202` status code and respond later. If you respond later you should respond
-within 10 seconds for low latency experiences like chat or within 10 minutes for email.
+You can respond immediately with a body response and `200` or you can respond with a `202` status code and respond later. If you respond later you should respond
+within 10 seconds for low latency experiences like chat or within 10 minutes for email. For `20
 
 ## Example implementation
 
