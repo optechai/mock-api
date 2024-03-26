@@ -8,8 +8,8 @@ const router = express.Router()
 
 const WEBHOOK_HEADER_NAME = 'x-optech-webhook-signature'
 const OPTECH_SHARED_SECRET =
-  process.env.OPTECH_SHARED_SECRET || 'YOUR_WEBHOOK_SIGNATURE_KEY'
-const CLIENT_ID = process.env.OPTECH_CLIENT_ID || 'opt_acb1234'
+  process.env.OPTECH_CLIENT_SECRET || 'YOUR_WEBHOOK_SIGNATURE_KEY'
+const OPTECH_CLIENT_ID = process.env.OPTECH_CLIENT_ID || 'opt_acb1234'
 
 /**
  * Use this to decode / validate the signature provided in the header
@@ -112,13 +112,13 @@ router.get('/validate', (req, res) => {
 })
 
 /**
- * Push a new request to the API
+ * Push a new request to the API (simulated delayed response) - in practice this would be the same as the immediate response 
  * @example curl
  * ```
  * curl -X \
  * POST -H \
  * "content-type: application/json" -H \
- * "x-sha-256: sha256 of the payload|PUBLIC_KEY
+ * "x-optech-webhook-signature: sha256 of the payload|PUBLIC_KEY
  * -d '{
  * "link": "http://localhost:3000/ingest/1234",
  *  "data": {
@@ -127,7 +127,7 @@ router.get('/validate', (req, res) => {
  * }' http://localhost:4000/api/push
  * ```
  */
-router.post('/push', (req, res) => {
+router.post('/', (req, res) => {
   console.log('-------- POST /webhook/push --------')
   console.log('request headers', req.headers)
   console.log('request body', req.body)
@@ -149,7 +149,7 @@ router.post('/push', (req, res) => {
         headers: {
           // for the data
           'Content-Type': 'application/json',
-          authorization: `Basic ${CLIENT_ID}`,
+          authorization: `Basic ${OPTECH_CLIENT_ID}`,
           [WEBHOOK_HEADER_NAME]: signature,
         },
         body,
@@ -163,23 +163,23 @@ router.post('/push', (req, res) => {
 })
 
 /**
- * Push a new request to the API
+ * Push a new request to the API (simulated immediate response)
  * @example curl
  * ```
  * curl -X \
  * POST -H \
  * "content-type: application/json" -H \
- * "authorization: Basic OPTECH_CLIENT_TOKEN" \
- * "x-signature: sha256 of the payload
+ * "authorization: Basic OPTECH_CLIENT_ID" \
+ * "x-optech-webhook-signature: sha256 of the payload
  * -d '{
  * "link": "http://localhost:3000/ingest/1234",
  *  "data": {
  *     "userId": "some-user-id"
  *  }
- * }' http://localhost:4000/api/push_immediate
+ * }' http://localhost:4000/api/push/immediate
  * ```
  */
-router.post('/push_immediate', (req, res) => {
+router.post('/immediate', (req, res) => {
   console.log('-------- POST /webhook/push_immediate --------')
   console.log('request headers', req.headers)
   console.log('request body', req.body)
@@ -198,7 +198,7 @@ router.post('/push_immediate', (req, res) => {
   res
     .status(200)
     .header('Content-Type', 'application/json')
-    .header('authorization', CLIENT_ID)
+    .header('authorization', `Basic ${OPTECH_CLIENT_ID}`)
     .header(WEBHOOK_HEADER_NAME, signature)
     .send(body)
 })
