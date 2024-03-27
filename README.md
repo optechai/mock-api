@@ -49,7 +49,7 @@ You should respond to this request with a JSON object containing the data you wi
 ```
 
 You can respond immediately with a body response and `200` or you can respond with a `202` status code and respond later. If you respond later you should respond
-within 10 seconds for low latency experiences like chat or within 10 minutes for email. For `20
+within 10 seconds for low latency experiences like chat or within 10 minutes for email.
 
 ## Example implementation
 
