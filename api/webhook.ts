@@ -186,7 +186,8 @@ router.post('/', (req, res) => {
 const requestMap = {
   getOrders: '/api/user/orders',
   getFamily: '/api/family',
-  getUser: '/api/user'
+  getUser: '/api/user',
+  email: '/api/profile',
 } as const
 
 /**
