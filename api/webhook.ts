@@ -222,6 +222,7 @@ router.post('/immediate', async (req, res) => {
 
   const requestPath = requestMap[key]
   const requestURL = `${API_URL}${requestPath}`
+  console.log('Attempting to fetch', requestURL)
   const responseData = await fetch(requestURL).then((res) => res.json())
 
   console.log('received', responseData)
