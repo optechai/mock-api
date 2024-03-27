@@ -17,8 +17,8 @@ const RequestSchema = z.object({
   data: z.record(z.unknown()),
 })
 
-const URL_BASE = process.env.VERCEL_URL || 'localhost:4000'
-const API_URL = process.env.VERCEL_URL ? `https://${URL_BASE}` : `http://${URL_BASE}`
+const URL_BASE = 'template-api-integration.vercel.app' || 'localhost:4000'
+const API_URL = 'template-api-integration.vercel.app' ? `https://${URL_BASE}` : `http://${URL_BASE}`
 
 export type OptechRequest = z.infer<typeof RequestSchema>
 
