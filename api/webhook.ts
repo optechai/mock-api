@@ -187,7 +187,7 @@ const requestMap = {
   getOrders: '/api/user/orders',
   getFamily: '/api/family',
   getUser: '/api/user',
-  email: '/api/profile',
+  retrieveCustomerEmail: '/api/profile',
 } as const
 
 /**
