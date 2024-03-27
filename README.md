@@ -24,7 +24,8 @@ path format, but the request will always be a `POST` request with a `JSON` body 
   // the unique url to return the data to - only valid for 10 minutes after the request / and relevant if using an async flow
   "link": "https://api.optech.ai/ingest/<id>",
   // data requests from the OpTech platform
-  "data": {
+  "key": "value",
+  "inputs": {
     "key": "value"
   }
 }

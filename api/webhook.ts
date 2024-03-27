@@ -1,12 +1,33 @@
 import express from 'express'
 import crypto from 'crypto'
+import z from 'zod'
 
-// Swap YOUR_WEBHOOK_SIGNATURE_KEY below with your webhook signature key from:
-// https://app.optech.ai/setup/webhooks
+const RequestSchema = z.object({
+  /**
+   * Always available in the request body
+   */
+  link: z.string().url(),
+  /** 
+   * key is the payload to be processed eg 'user' or 'order' 
+   */
+  key: z.string(), 
+  /**
+   * The input data needed to process the request.
+   */
+  data: z.record(z.unknown()),
+})
+
+const URL_BASE = process.env.VERCEL_URL || 'localhost:4000'
+const API_URL = process.env.VERCEL_URL ? `https://${URL_BASE}` : `http://${URL_BASE}`
+
+export type OptechRequest = z.infer<typeof RequestSchema>
 
 const router = express.Router()
 
 const WEBHOOK_HEADER_NAME = 'x-optech-webhook-signature'
+
+// Swap YOUR_WEBHOOK_SIGNATURE_KEY below with your webhook signature key from:
+// https://app.optech.ai/setup/webhooks
 const OPTECH_SHARED_SECRET =
   process.env.OPTECH_CLIENT_SECRET || 'YOUR_WEBHOOK_SIGNATURE_KEY'
 const OPTECH_CLIENT_ID = process.env.OPTECH_CLIENT_ID || 'opt_acb1234'
@@ -128,7 +149,7 @@ router.get('/validate', (req, res) => {
  * ```
  */
 router.post('/', (req, res) => {
-  console.log('-------- POST /webhook/push --------')
+  console.log('-------- POST /api/push --------')
   console.log('request headers', req.headers)
   console.log('request body', req.body)
 
@@ -162,6 +183,12 @@ router.post('/', (req, res) => {
   res.status(202).send('Accepted')
 })
 
+const requestMap = {
+  getOrders: '/api/user/orders',
+  getFamily: '/api/family',
+  getUser: '/api/user'
+} as const
+
 /**
  * Push a new request to the API (simulated immediate response)
  * @example curl
@@ -179,18 +206,22 @@ router.post('/', (req, res) => {
  * }' http://localhost:4000/api/push/immediate
  * ```
  */
-router.post('/immediate', (req, res) => {
-  console.log('-------- POST /webhook/push_immediate --------')
+router.post('/immediate', async (req, res) => {
+  console.log('-------- POST /api/push/immediate --------')
   console.log('request headers', req.headers)
   console.log('request body', req.body)
 
   // data is the payload to be processed (all inputs for required)
-  const { link, data } = req.body
+  const { link, data: _data, key } = RequestSchema.parse(req.body)
 
+  const requestPath = requestMap[key]
+  const requestURL = `${API_URL}${requestPath}`
+  const responseData = await fetch(requestURL).then((res) => res.json())
+
+  console.log('received', responseData)
   const body = JSON.stringify({
     link,
-    userId: 'some-user-id',
-    data,
+    data: responseData,
   })
 
   const signature = generateSignature(body, OPTECH_SHARED_SECRET)
