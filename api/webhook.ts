@@ -214,6 +214,11 @@ router.post('/immediate', async (req, res) => {
   // data is the payload to be processed (all inputs for required)
   const { link, data: _data, key } = RequestSchema.parse(req.body)
 
+  if (key === 'validation') {
+    res.status(200).send('OK')
+    return
+  }
+
   const requestPath = requestMap[key]
   const requestURL = `${API_URL}${requestPath}`
   const responseData = await fetch(requestURL).then((res) => res.json())
