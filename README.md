@@ -26,7 +26,8 @@ path format, but the request will always be a `POST` request with a `JSON` body 
   // data requests from the OpTech platform
   "key": "value",
   "inputs": {
-    "key": "value"
+    "key1": "value1",
+    "key2": "value2"
   }
 }
 ```
@@ -43,7 +44,8 @@ You should respond to this request with a JSON object containing the data you wi
 ```json
 {
   "data": {
-    "key": "value"
+    "key": "value",
+    "key2": "value2"
   }
 }
 ```
