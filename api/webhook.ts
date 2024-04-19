@@ -183,10 +183,22 @@ router.post('/', (req, res) => {
 })
 
 const requestMap = {
-  getOrders: '/api/user/orders',
-  getFamily: '/api/family',
-  getUser: '/api/user',
-  retrieveCustomerEmail: '/api/profile',
+  getOrders: {
+    path: '/api/user/orders',
+    outputKey: 'orders'
+  },
+  getFamily: {
+    path: '/api/family',
+    outputKey: 'familyMembers'
+  },
+  getUser: {
+    path: '/api/user',
+    outputKey: 'customerFirstName',
+  },
+  retrieveCustomerEmail: {
+    path: '/api/profile',
+    outputKey: 'email'
+  }
 } as const
 
 /**
@@ -212,22 +224,24 @@ router.post('/immediate', async (req, res) => {
   console.log('request body', req.body)
 
   // data is the payload to be processed (all inputs for required)
-  const { link, data: _data, key } = RequestSchema.parse(req.body)
+  const { link: _link, data: _data, key } = RequestSchema.parse(req.body)
 
   if (key === 'validation') {
     res.status(200).send('OK')
     return
   }
 
-  const requestPath = requestMap[key]
-  const requestURL = `${API_URL}${requestPath}`
+  const { outputKey, path } = requestMap[key]
+  const requestURL = `${API_URL}${path}`
   console.log('Attempting to fetch', requestURL)
   const responseData = await fetch(requestURL).then((res) => res.json())
 
   console.log('received', responseData)
   const body = JSON.stringify({
-    link,
-    data: responseData,
+    data: {
+      // in practice this could be multiple keys
+      [outputKey]: responseData
+    },
   })
 
   const signature = generateSignature(body, OPTECH_SHARED_SECRET)
