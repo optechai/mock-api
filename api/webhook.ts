@@ -243,6 +243,7 @@ router.post('/immediate', async (req, res) => {
       [outputKey]: responseData
     },
   })
+  console.log('sending', body)
 
   const signature = generateSignature(body, OPTECH_SHARED_SECRET)
 
