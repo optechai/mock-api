@@ -6,7 +6,8 @@ import cards1 from './cards-1'
 import cards2 from './cards-2'
 import cardReplaced from './card-replaced'
 import userTier from './tier'
-import familyRoute from './family'
+import familyRoute from './_family'
+import userRoute from './_user'
 import webhookRoute from './webhook'
 
 const app = express()
@@ -20,52 +21,6 @@ app.use(
   }),
 )
 
-app.use('/api/family', familyRoute)
-
-app.get('/api/user/transactions', function (req, res) {
-  console.log('')
-  console.log('-------- GET /user/transactions --------')
-  console.log('request headers', req.headers)
-  // Generate dates
-  // Date one
-  const dateOne = new Date()
-  dateOne.setDate(dateOne.getDate() - 1)
-  dateOne.setHours(9, 0, 0, 0)
-  // Date two
-  const dateTwo = new Date()
-  dateTwo.setDate(dateTwo.getDate() - 1)
-  dateTwo.setHours(11, 0, 0, 0)
-  // Date three
-  const dateThree = new Date()
-  dateThree.setDate(dateThree.getDate() - 2)
-  dateThree.setHours(6, 0, 0, 0)
-
-  const response = {
-    transactions: [
-      {
-        date: dateOne,
-        merchant: 'Legitimate Business, Inc',
-        amount: '$100.00',
-      },
-      {
-        date: dateTwo,
-        merchant: "Shady's iTunes Gift Card Shop",
-        amount: '$420.00',
-      },
-      {
-        date: dateThree,
-        merchant: "Lucky's Lunch Laboratory",
-        amount: '$24.71',
-      },
-    ],
-  }
-  console.log(
-    'response body',
-    util.inspect(response, false, null, true /* enable colors */),
-  )
-  res.send(response)
-})
-
 app.post('/api/disputes/submit', function (req, res) {
   console.log(`-------- POST /disputes/submit --------`)
   console.log('request headers', req.headers)
@@ -74,144 +29,6 @@ app.post('/api/disputes/submit', function (req, res) {
     util.inspect(req.body, false, null, true /* enable colors */),
   )
   const response = { success: true }
-  console.log(
-    'response body',
-    util.inspect(response, false, null, true /* enable colors */),
-  )
-  res.send(response)
-})
-
-app.post('/api/user/email', function (req, res) {
-  console.log(`-------- POST /user/email --------`)
-  console.log('request headers', req.headers)
-  console.log(
-    'request body',
-    util.inspect(req.body, false, null, true /* enable colors */),
-  )
-  const response = { success: true }
-  console.log(
-    'response body',
-    util.inspect(response, false, null, true /* enable colors */),
-  )
-  res.send(response)
-})
-
-app.get('/api/user', function (req, res) {
-  console.log('')
-  console.log('-------- GET /user --------')
-  console.log('request headers', req.headers)
-  const response = {
-    user: {
-      address: {
-        city: 'string',
-        country: 'string',
-        line1: 'string',
-        line2: 'string',
-        location: {
-          latitude: 0,
-          longitude: 0,
-        },
-        state_province_region: 'string',
-        zip_postal_code: 'string',
-      },
-      auto_billing: true,
-      createdAtMs: 'string',
-      dob: 'string',
-      id: 'string',
-      kyc_errors: ['INVALID_ERROR'],
-      kyc_status: 'INVALID',
-      legalName: {
-        firstName: 'Paul',
-        lastName: 'Lastname',
-      },
-      monitor_credit: true,
-      nickname: 'string',
-      picture_url: 'string',
-      report_credit: true,
-      shipping: {
-        address: {
-          city: 'Palo Alto',
-          country: 'United States',
-          line1: '120 Hawthorne Ave',
-          line2: '',
-          location: {
-            latitude: 0,
-            longitude: 0,
-          },
-          stateProvinceRegion: 'CA',
-          zipPostalCode: '94301',
-        },
-        is_confirmed: true,
-        is_validated: true,
-      },
-      ssn_on_file: 'INVALID_SSN_ON_FILE',
-      updated_at_ms: 'string',
-    },
-  }
-  console.log(
-    'response body',
-    util.inspect(response, false, null, true /* enable colors */),
-  )
-  res.send(response)
-})
-
-app.post('/api/user/shipping-address', function (req, res) {
-  console.log(`-------- POST /user/shipping-address --------`)
-  console.log('request headers', req.headers)
-  console.log(
-    'request body',
-    util.inspect(req.body, false, null, true /* enable colors */),
-  )
-  const response = { success: true }
-  console.log(
-    'response body',
-    util.inspect(response, false, null, true /* enable colors */),
-  )
-  res.send(response)
-})
-
-app.get('/api/user/orders', function (req, res) {
-  console.log('')
-  console.log('-------- GET /user/orders --------')
-  console.log('request headers', req.headers)
-  const response = {
-    orders: [
-      {
-        id: '1',
-        status: 'In transit',
-        estimatedDeliveryDays: '3 days',
-      },
-    ],
-  }
-  console.log(
-    'response body',
-    util.inspect(response, false, null, true /* enable colors */),
-  )
-  res.send(response)
-})
-
-app.get('/api/user/appointments', function (req, res) {
-  console.log('')
-  console.log('-------- GET /user/appointments --------')
-  console.log('request headers', req.headers)
-  const dateOne = new Date()
-  dateOne.setDate(dateOne.getDate() + 1)
-  dateOne.setHours(9, 0, 0, 0)
-  const dateTwo = new Date()
-  dateTwo.setDate(dateTwo.getDate() + 2)
-  dateTwo.setHours(11, 0, 0, 0)
-  const response = {
-    availableSlots: [
-      {
-        id: '1',
-        date: dateOne,
-      },
-      {
-        id: '2',
-        date: dateTwo,
-      },
-    ],
-  }
   console.log(
     'response body',
     util.inspect(response, false, null, true /* enable colors */),
@@ -254,24 +71,6 @@ app.post('/api/card/replace', function (req, res) {
     util.inspect(req.body, false, null, true /* enable colors */),
   )
   const response = { success: true }
-  console.log(
-    'response body',
-    util.inspect(response, false, null, true /* enable colors */),
-  )
-  res.send(response)
-})
-
-app.post('/api/user', function (req, res) {
-  console.log('-------- POST /user --------')
-  console.log('request headers', req.headers)
-  console.log(
-    'request body',
-    util.inspect(req.body, false, null, true /* enable colors */),
-  )
-  const response = {
-    success: true,
-    updatedShippingAddress: req.body.shippingAddress,
-  }
   console.log(
     'response body',
     util.inspect(response, false, null, true /* enable colors */),
@@ -369,6 +168,8 @@ app.post('/api/card/:cardId/replace/shipping', function (req, res) {
   res.send(response)
 })
 
+app.use('/api/user', userRoute)
+app.use('/api/family', familyRoute)
 app.use('/api/push', webhookRoute)
 
 const port = process.env.PORT || 4000
