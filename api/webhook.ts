@@ -187,11 +187,11 @@ const requestMap = {
     path: '/api/user/orders',
     outputKey: 'orders'
   },
-  getFamily: {
+  getFamilyMembers: {
     path: '/api/family',
     outputKey: 'familyMembers'
   },
-  getUser: {
+  getCustomerName: {
     path: '/api/user',
     outputKey: 'customerFirstName',
   },
