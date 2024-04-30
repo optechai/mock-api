@@ -152,9 +152,13 @@ router.post('/', async (req, res) => {
   console.log('request headers', req.headers)
   console.log('request body', req.body)
 
-
   // data is the payload to be processed (all inputs for required)
   const { link, key } = RequestSchema.parse(req.body)
+
+  if (key === 'validation') {
+    res.status(200).send('OK')
+    return
+  }
 
   const { path } = requestMap[key]
   const requestURL = `${API_URL}${path}`
