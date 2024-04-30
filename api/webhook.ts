@@ -172,6 +172,7 @@ router.post('/', async (req, res) => {
         data: responseData,
       })
       const signature = generateSignature(body, OPTECH_SHARED_SECRET)
+      console.log('sending push request with', { body })
       await fetch(link, {
         method: 'POST',
         headers: {
@@ -185,7 +186,7 @@ router.post('/', async (req, res) => {
     } catch (error) {
       console.error(error)
     }
-  }, 2000)
+  }, 100)
 
   res.status(202).send('Accepted')
 })
