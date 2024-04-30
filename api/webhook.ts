@@ -165,30 +165,30 @@ router.post('/', async (req, res) => {
   console.log('Attempting to fetch', requestURL)
   const responseData = await fetch(requestURL).then((res) => res.json()) 
 
-  // simulate a delay in processing the request pub/sub
-  setTimeout(async () => {
-    try {
-      const body = JSON.stringify({
-        data: responseData,
-      })
-      const signature = generateSignature(body, OPTECH_SHARED_SECRET)
-      console.log('sending push request with', { body })
-      await fetch(link, {
-        method: 'POST',
-        headers: {
-          // for the data
-          'Content-Type': 'application/json',
-          authorization: `Basic ${OPTECH_CLIENT_ID}`,
-          [WEBHOOK_HEADER_NAME]: signature,
-        },
-        body,
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }, 100)
+  // in reality this response is deferred
+  try {
+    const body = JSON.stringify({
+      data: responseData,
+    })
+    const signature = generateSignature(body, OPTECH_SHARED_SECRET)
+    console.log('sending push request with', { body })
+    await fetch(link, {
+      method: 'POST',
+      headers: {
+        // for the data
+        'Content-Type': 'application/json',
+        authorization: `Basic ${OPTECH_CLIENT_ID}`,
+        [WEBHOOK_HEADER_NAME]: signature,
+      },
+      body,
+    })
+  } catch (error) {
+    console.error(error)
+  }
 
-  res.status(202).send('Accepted')
+  // The actual response is included purely for debug
+  // In practice, the response would be deferred and a 202 is only returned
+  res.status(202).send({ data: responseData })
 })
 
 const requestMap = {
