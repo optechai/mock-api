@@ -147,21 +147,25 @@ router.get('/validate', (req, res) => {
  * }' http://localhost:4000/api/push
  * ```
  */
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   console.log('-------- POST /api/push --------')
   console.log('request headers', req.headers)
   console.log('request body', req.body)
 
+
   // data is the payload to be processed (all inputs for required)
-  const { link, data } = req.body
+  const { link, key } = RequestSchema.parse(req.body)
+
+  const { path } = requestMap[key]
+  const requestURL = `${API_URL}${path}`
+  console.log('Attempting to fetch', requestURL)
+  const responseData = await fetch(requestURL).then((res) => res.json()) 
 
   // simulate a delay in processing the request pub/sub
   setTimeout(async () => {
     try {
       const body = JSON.stringify({
-        link,
-        userId: 'some-user-id',
-        data,
+        data: responseData,
       })
       const signature = generateSignature(body, OPTECH_SHARED_SECRET)
       await fetch(link, {
