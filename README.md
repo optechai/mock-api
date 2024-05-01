@@ -53,6 +53,14 @@ You should respond to this request with a JSON object containing the data you wi
 You can respond immediately with a body response and `200` or you can respond with a `202` status code and respond later. If you respond later you should respond
 within 10 seconds for low latency experiences like chat or within 10 minutes for email.
 
+If responding async you will need to include the following headers in your response.
+
+```http
+x-optech-signature: <signature> // a signature generated using OPTECH_CLIENT_SECRET from the `body` of your response.
+content-type: application/json // the content type of the request
+authorization: Basic OPTECH_CLIENT_ID // client id
+```
+
 ## Example implementation
 
 See the [example implementation](api/webhook.ts) for a simple example of how to integrate with the OpTech API.
