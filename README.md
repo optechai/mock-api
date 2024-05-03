@@ -64,3 +64,19 @@ authorization: Basic OPTECH_CLIENT_ID // client id
 ## Example implementation
 
 See the [example implementation](api/webhook.ts) for a simple example of how to integrate with the OpTech API.
+
+### Developing locally
+
+Add the following to your `.env` file:
+
+```env
+OPTECH_CLIENT_ID=xxxxxxxxxx
+OPTECH_CLIENT_SECRET=xxxxxxxxxxx
+```
+
+Then run the following commands:
+
+```bash
+npm install
+npm run dev
+```
