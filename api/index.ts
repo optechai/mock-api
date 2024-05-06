@@ -1,4 +1,4 @@
-// conver all to esm import
+import 'dotenv/config'
 import express from 'express'
 import util from 'util'
 import accounts from './accounts'
@@ -178,4 +178,4 @@ app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`)
 })
 
-module.exports = app
+export default app
