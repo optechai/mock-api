@@ -26,7 +26,7 @@ const router = express.Router()
 const WEBHOOK_HEADER_NAME = 'x-optech-webhook-signature'
 
 // Swap YOUR_WEBHOOK_SIGNATURE_KEY below with your webhook signature key from:
-// https://app.optech.ai/setup/webhooks
+// https://app.optech.ai/integrations/webhooks
 const OPTECH_SHARED_SECRET =
   process.env.OPTECH_CLIENT_SECRET || 'YOUR_WEBHOOK_SIGNATURE_KEY'
 const OPTECH_CLIENT_ID = process.env.OPTECH_CLIENT_ID || 'opt_acb1234'

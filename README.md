@@ -4,7 +4,7 @@
 
 ### Prerequisites
 
-1. You need to have a valid client secret and client id to access the OpTech API. These are available here [OpTech API](https://app.optech.ai/setup/webhooks)
+1. You need to have a valid client secret and client id to access the OpTech API. These are available here [OpTech API](https://app.optech.ai/integrations/webhooks)
 2. Once you have these add to your environment:
 
 ```env

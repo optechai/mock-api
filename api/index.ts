@@ -84,6 +84,7 @@ app.get('/api/profile', function (req, res) {
   console.log('request headers', req.headers)
   const response = {
     profile: {
+      preferredName: 'John Doe',
       verifiedAliases: [
         {
           userId: 'u:123',
