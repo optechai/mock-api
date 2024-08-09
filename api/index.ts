@@ -9,6 +9,7 @@ import userTier from './tier'
 import familyRoute from './_family'
 import userRoute from './_user'
 import webhookRoute from './webhook'
+import { checkFXConversion } from './checkFXConversion'
 
 const app = express()
 
@@ -34,38 +35,13 @@ app.post('/api/fx-check', function (req, res) {
   const convertedTotal = body.converted_total_amount
   const fxRate = body.exchange_rate_original_to_target
 
-  const estimatedConvertedTotal = originalTotal * fxRate
+  const checkResult = checkFXConversion(originalTotal, convertedTotal, fxRate)
 
-  const estimatedConversionUpperBound = estimatedConvertedTotal * 1.02
-  const estimatedConversionLowerBound = estimatedConvertedTotal * 0.98
-
-  if (
-    originalTotal <= estimatedConversionUpperBound &&
-    originalTotal >= estimatedConversionLowerBound
-  ) {
-    const response = {
-      result: 'conversion appears accurate, estimate is within 2% of actual',
-      estimatedConvertedTotal: estimatedConvertedTotal,
-      actualConvertedTotal: convertedTotal,
-    }
-    console.log(
-      'response body',
-      util.inspect(response, false, null, true /* enable colors */),
-    )
-    res.send(response)
-  } else {
-    const response = {
-      result:
-        'conversion appears inaccurate, estimate is more than 2% different to actual',
-      estimatedConvertedTotal: estimatedConvertedTotal,
-      actualConvertedTotal: convertedTotal,
-    }
-    console.log(
-      'response body',
-      util.inspect(response, false, null, true /* enable colors */),
-    )
-    res.send(response)
-  }
+  console.log(
+    'response body',
+    util.inspect(checkResult, false, null, true /* enable colors */),
+  )
+  res.send(checkResult)
 })
 
 app.post('/api/disputes/submit', function (req, res) {
