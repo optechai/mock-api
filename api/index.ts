@@ -21,6 +21,47 @@ app.use(
   }),
 )
 
+app.post('/api/fx-check', function (req, res) {
+  console.log(`-------- POST /fx-check --------`)
+    console.log('request headers', req.headers)
+  console.log(
+    'request body',
+    util.inspect(req.body, false, null, true /* enable colors */),
+  )
+  const originalTotal = body.original_total_amount
+  const convertedTotal = body.converted_total_amount
+  const fxRate = body.exchange_rate_original_to_target
+
+  const estimatedConvertedTotal = originalTotal * fxRate
+
+  const estimatedConversionUpperBound = estimatedConvertedTotal * 1.02
+  const estimatedConversionLowerBound = estimatedConvertedTotal * 0.98
+
+  if (originalTotal <= estimatedConversionUpperBound && originalTotal >= estimatedConversionLowerBound) {
+    response = {
+      result: 'conversion appears accurate, estimate is within 2% of actual',
+      estimatedConvertedTotal: estimatedConvertedTotal,
+      actualConvertedTotal: convertedTotal
+    }
+    console.log(
+      'response body',
+      util.inspect(response, false, null, true /* enable colors */),
+    )
+  res.send(response)
+  } else {
+        response = {
+      result: 'conversion appears inaccurate, estimate is more than 2% different to actual',
+      estimatedConvertedTotal: estimatedConvertedTotal,
+      actualConvertedTotal: convertedTotal
+    }
+    console.log(
+      'response body',
+      util.inspect(response, false, null, true /* enable colors */),
+    )
+  res.send(response)
+  }
+}
+
 app.post('/api/disputes/submit', function (req, res) {
   console.log(`-------- POST /disputes/submit --------`)
   console.log('request headers', req.headers)
