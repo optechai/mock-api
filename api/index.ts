@@ -9,7 +9,10 @@ import userTier from './tier'
 import familyRoute from './_family'
 import userRoute from './_user'
 import webhookRoute from './webhook'
-import { checkFXConversion } from './checkFXConversion'
+import {
+  checkFXConversion,
+  CheckFXConversionResponse,
+} from './checkFXConversion'
 
 const app = express()
 
@@ -31,11 +34,15 @@ app.post('/api/fx-check', function (req, res) {
   )
   const body = req.body
 
-  const originalTotal = body.original_total_amount
-  const convertedTotal = body.converted_total_amount
-  const fxRate = body.exchange_rate_original_to_target
+  const originalTotal = Number(body.original_total_amount)
+  const convertedTotal = Number(body.converted_total_amount)
+  const fxRate = Number(body.exchange_rate_original_to_target)
 
-  const checkResult = checkFXConversion(originalTotal, convertedTotal, fxRate)
+  const checkResult: CheckFXConversionResponse = checkFXConversion(
+    originalTotal,
+    convertedTotal,
+    fxRate,
+  )
 
   console.log(
     'response body',

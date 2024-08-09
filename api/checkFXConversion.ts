@@ -1,4 +1,14 @@
-export const checkFXConversion = (originalTotal, convertedTotal, fxRate) => {
+export type CheckFXConversionResponse = {
+  result: string
+  estimatedConvertedTotal: number
+  actualConvertedTotal: number
+}
+
+export const checkFXConversion = (
+  originalTotal: number,
+  convertedTotal: number,
+  fxRate: number,
+): CheckFXConversionResponse => {
   // originalTotal: 100
   // convertedTotal: 120
   // fxRate: 1.2
