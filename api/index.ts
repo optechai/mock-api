@@ -25,6 +25,57 @@ app.use(
   }),
 )
 
+app.post('/api/sum', function (req, res) {
+  console.log(`-------- POST /sum --------`)
+  console.log('request headers', req.headers)
+  console.log(
+    'request body',
+    util.inspect(req.body, false, null, true /* enable colors */),
+  )
+
+  const body = req.body
+
+  // the body should be an array of numbers, but they're probably provided as strings
+  const numbers = body.numbers.map((n: string) => {
+    // remove dollar signs
+    const nCleaned = n.replace('$', '')
+
+    // Try to convert to a number, if not possible, return 'NaN'
+    try {
+      return Number(nCleaned)
+    } catch (e) {
+      return 'NaN'
+    }
+  })
+
+  // Sum the values -- instead of erroring on 'NaN', just don't include in total
+  const sum = numbers.reduce((acc: number, n: number) => {
+    if (!isNaN(n)) {
+      return acc + n
+    }
+    return acc
+  }, 0)
+
+  // If there are NaNs, still return 200, but provide an explanatory message so the AI can iterate on its function call
+  if (numbers.includes('NaN')) {
+    const result = {
+      sum: sum,
+      message:
+        'Some of the values provided could not be converted to numbers. Please check the values and try again.',
+    }
+
+    res.send(result)
+  }
+
+  // Otherwise, return the result
+  const result = {
+    sum: sum,
+    message: 'The sum of the numbers is calculated successfully.',
+  }
+
+  res.send(result)
+})
+
 app.post('/api/fx-check', function (req, res) {
   console.log(`-------- POST /fx-check --------`)
   console.log('request headers', req.headers)
