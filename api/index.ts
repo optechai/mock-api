@@ -33,10 +33,25 @@ app.post('/api/sum', function (req, res) {
     util.inspect(req.body, false, null, true /* enable colors */),
   )
 
+  // expect input like:
+  // {
+  //   "arrayOfNumbersToSum": ["$1.00", "$2.00", "$3.00"]
+  // }
+
   const body = req.body
 
+  // If we don't get the right input, don't error, just provide instructions do the AI can iterate
+  if (!body.arrayOfNumbersToSum) {
+    const result = {
+      sum: 0,
+      message: 'No numbers provided to sum.',
+    }
+    res.send(result)
+  }
+  const numbersToSum = body.arrayOfNumbersToSum
+
   // the body should be an array of numbers, but they're probably provided as strings
-  const numbers = body.numbers.map((n: string) => {
+  const numbers = numbersToSum.map((n: string) => {
     // remove dollar signs
     const nCleaned = n.replace('$', '')
 
