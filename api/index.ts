@@ -48,7 +48,8 @@ app.post('/api/sum', function (req, res) {
     }
     res.send(result)
   }
-  const numbersToSum = body.arrayOfNumbersToSum
+  const numbersToSum: string[] = JSON.parse(body.arrayOfNumbersToSum)
+  console.log('numbersToSum', numbersToSum)
 
   // the body should be an array of numbers, but they're probably provided as strings
   const numbers = numbersToSum.map((n: string) => {
