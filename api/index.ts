@@ -52,16 +52,19 @@ app.post('/api/sum', function (req, res) {
   console.log('numbersToSum', numbersToSum)
 
   // the body should be an array of numbers, but they're probably provided as strings
-  const numbers = numbersToSum.map((n: string) => {
+  const numbers = numbersToSum.map((n: string | number) => {
     // remove dollar signs
-    const nCleaned = n.replace('$', '')
-
-    // Try to convert to a number, if not possible, return 'NaN'
-    try {
-      return Number(nCleaned)
-    } catch (e) {
-      return 'NaN'
+    if (typeof n === 'string') {
+      const nCleaned = n.replace('$', '')
+      // Try to convert to a number, if not possible, return 'NaN'
+      try {
+        return Number(nCleaned)
+      } catch (e) {
+        return 'NaN'
+      }
     }
+
+    return n
   })
 
   // Sum the values -- instead of erroring on 'NaN', just don't include in total
