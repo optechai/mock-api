@@ -8,6 +8,7 @@ import cardReplaced from './card-replaced'
 import userTier from './tier'
 import familyRoute from './_family'
 import userRoute from './_user'
+import csvRoute from './_csv'
 import webhookRoute from './webhook'
 import {
   checkFXConversion,
@@ -272,6 +273,7 @@ app.post('/api/card/:cardId/replace/shipping', function (req, res) {
 app.use('/api/user', userRoute)
 app.use('/api/family', familyRoute)
 app.use('/api/push', webhookRoute)
+app.use('/api/csv', csvRoute)
 
 const port = process.env.PORT || 4000
 
