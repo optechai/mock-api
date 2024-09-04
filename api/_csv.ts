@@ -28,10 +28,11 @@ router.post('/ingest', async (req, res) => {
 
   const parser = parse({
     delimiter: ',',
+    columns: true,
   })
 
   res.writeHead(200, {
-    'Content-Type': 'text/csv',
+    'Content-Type': 'application/x-ndjson',
     'Cache-Control': 'no-cache',
     Connection: 'keep-alive',
   })
@@ -39,8 +40,8 @@ router.post('/ingest', async (req, res) => {
   readStream
     .pipe(parser)
     .on('data', (row) => {
-      res.write(row.join(',') + '\n')
-    })
+      res.write(JSON.stringify(row) + '\n')
+    }) 
     .on('end', () => {
       res.end()
     })
