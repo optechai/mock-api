@@ -37,15 +37,21 @@ router.post('/ingest', async (req, res) => {
     Connection: 'keep-alive',
   })
 
+  let isFirstLine = true
+
   res.write('[\n')
 
   readStream
     .pipe(parser)
     .on('data', (row) => {
-      res.write(',' + JSON.stringify(row) + '\n')
+      if (!isFirstLine) {
+        res.write(',\n')
+      }
+      res.write(JSON.stringify(row))
+      isFirstLine = false
     }) 
     .on('end', () => {
-      res.write(']')
+      res.write('\n]')
       res.end()
     })
     .on('error', (err) => {
