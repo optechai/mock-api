@@ -1,12 +1,12 @@
 {
-    "rewrites": [
-        {
-            "source": "/api/(.*)",
-            "destination": "/api"
-        },
-        {
-            "source": "/family/impersonate",
-            "destination": "/api/family/impersonate"
-        }
-    ]
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    },
+    {
+      "source": "/family/impersonate",
+      "destination": "/api/family/impersonate"
+    }
+  ]
 }

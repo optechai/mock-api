@@ -7,17 +7,19 @@ const RequestSchema = z.object({
    * Always available in the request body
    */
   link: z.string().url(),
-  /** 
-   * key is the payload to be processed eg 'user' or 'order' 
+  /**
+   * key is the payload to be processed eg 'user' or 'order'
    */
-  key: z.string(), 
+  key: z.string(),
   /**
    * The input data needed to process the request.
    */
   data: z.record(z.unknown()),
 })
 
-const API_URL = process.env.VERCEL_URL ? 'https://template-api-integration.vercel.app' : 'http://localhost:4000'
+const API_URL = process.env.VERCEL_URL
+  ? 'https://template-api-integration.vercel.app'
+  : 'http://localhost:4000'
 
 export type OptechRequest = z.infer<typeof RequestSchema>
 
@@ -132,7 +134,7 @@ router.get('/validate', (req, res) => {
 })
 
 /**
- * Push a new request to the API (simulated delayed response) - in practice this would be the same as the immediate response 
+ * Push a new request to the API (simulated delayed response) - in practice this would be the same as the immediate response
  * @example curl
  * ```
  * curl -X \
@@ -163,7 +165,7 @@ router.post('/', async (req, res) => {
   const { path } = requestMap[key]
   const requestURL = `${API_URL}${path}`
   console.log('Attempting to fetch', requestURL)
-  const responseData = await fetch(requestURL).then((res) => res.json()) 
+  const responseData = await fetch(requestURL).then((res) => res.json())
 
   // in reality this response is deferred
   try {
@@ -194,11 +196,11 @@ router.post('/', async (req, res) => {
 const requestMap = {
   getOrders: {
     path: '/api/user/orders',
-    outputKey: 'orders'
+    outputKey: 'orders',
   },
   getFamilyMembers: {
     path: '/api/family',
-    outputKey: 'familyMembers'
+    outputKey: 'familyMembers',
   },
   getCustomerName: {
     path: '/api/user',
@@ -206,8 +208,8 @@ const requestMap = {
   },
   retrieveCustomerEmail: {
     path: '/api/profile',
-    outputKey: 'email'
-  }
+    outputKey: 'email',
+  },
 } as const
 
 /**
@@ -247,7 +249,7 @@ router.post('/immediate', async (req, res) => {
 
   console.log('received', responseData)
   const body = JSON.stringify({
-    data: responseData
+    data: responseData,
   })
   console.log('sending', body)
 

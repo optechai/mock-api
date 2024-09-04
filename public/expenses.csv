@@ -1,0 +1,4 @@
+amount,category,currency,employment_id,expense_date,receipt_content,receipt_name,reviewed_at,reviewer_id,tax_amount,timezone,title
+8000,tech_equipment,EUR,d4ebc714-4950-47a9-a464-28e1f1ab2a90,2020-12-11,UGVyaW9kIEVuZCBEYXRlLFBheSBEYXRlLEVtcG...5jZSBPZiBSZXNpZGVuYdXJyZW50LEFsbG93,receipt.pdf,2023-01-11T11:12:13Z,14c14128-f5f4-475a-8ec0-6329b4832a61,0,Etc/UTC,new keyboard
+15000,office_supplies,USD,a9b7c6d8-e69e-497b-bf6e-591d1f68e2b5,2021-03-05,Q3VzdG9tZXIgU2VydmljZSBSZWNlaXB0IERhdGU...5zdG9tZXIgQWxsZXc=,receipt.pdf,2023-02-15T10:30:00Z,8c3b12a8-b2f4-471a-bc9d-6a2b1d5e1a7d,200,America/New_York,printer paper
+12000,software,GBP,b7c8d6f4-4938-40a5-9e2e-17b2a6c2b7f8,2021-08-22,U29mdHdhcmUgU2VydmljZSBSZWNlaXB0IERhdGU...50LVNvZnR3YXJlLUFsbGV3,receipt.pdf,2023-03-22T09:45:00Z,9a3b42b9-e3f4-472a-9c9d-3d2c4e7f9a8d,300,Europe/London,antivirus software

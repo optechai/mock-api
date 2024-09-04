@@ -65,7 +65,6 @@ app.get('/transactions', function (req, res) {
   res.send(response)
 })
 
-
 app.post('/email', function (req, res) {
   console.log(`-------- POST /user/email --------`)
   console.log('request headers', req.headers)
