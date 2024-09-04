@@ -32,17 +32,20 @@ router.post('/ingest', async (req, res) => {
   })
 
   res.writeHead(200, {
-    'Content-Type': 'application/x-ndjson',
+    'Content-Type': 'application/json',
     'Cache-Control': 'no-cache',
     Connection: 'keep-alive',
   })
 
+  res.write('[\n')
+
   readStream
     .pipe(parser)
     .on('data', (row) => {
-      res.write(JSON.stringify(row) + '\n')
+      res.write(',' + JSON.stringify(row) + '\n')
     }) 
     .on('end', () => {
+      res.write(']')
       res.end()
     })
     .on('error', (err) => {
