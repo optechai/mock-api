@@ -1,7 +1,7 @@
 import express from 'express'
 import { parse } from 'csv-parse'
 import type { ReadableStream as WebReadableStream } from "node:stream/web";
-import { Stream } from 'stream'
+import { Stream, Transform } from 'stream'
     
 const router = express.Router()
 
@@ -39,21 +39,30 @@ router.post('/ingest', async (req, res) => {
 
   let isFirstLine = true
 
-  res.write('[\n')
+  const jsonStreamTransform = new Transform({
+    writableObjectMode: true,
+    readableObjectMode: true,
+    final(callback) {
+      this.push('\n]')
+      isFirstLine = true
+      callback()
+    },
+    transform(chunk, _encoding, callback) {
+      if (isFirstLine) {
+        this.push('[\n')
+        isFirstLine = false
+      } else {
+        this.push(',\n')
+      }
+      this.push(JSON.stringify(chunk))
+      callback()
+    }
+  })
 
   readStream
     .pipe(parser)
-    .on('data', (row) => {
-      if (!isFirstLine) {
-        res.write(',\n')
-      }
-      res.write(JSON.stringify(row))
-      isFirstLine = false
-    }) 
-    .on('end', () => {
-      res.write('\n]')
-      res.end()
-    })
+    .pipe(jsonStreamTransform)
+    .pipe(res)
     .on('error', (err) => {
       res.status(400).send(err)
     })
