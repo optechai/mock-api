@@ -8,23 +8,23 @@ const router = express.Router()
 /**
  * @example
  * ```bash
- * curl -X POST -d '{ "uri": "https://cdn.wsform.com/wp-content/uploads/2020/06/industry.csv" }' -H "Content-Type: application/json" http://localhost:4000/api/csv/ingest 
+ * curl -X POST -d '{ "url": "https://cdn.wsform.com/wp-content/uploads/2020/06/industry.csv" }' -H "Content-Type: application/json" http://localhost:4000/api/csv/ingest 
  * ```
  */
 router.post('/ingest', async (req, res) => {
-  if (!req.body.uri) {
-    return res.status(400).send('uri is required')
+  if (!req.body.url) {
+    return res.status(400).send('url is required')
   }
 
-  const { uri } = req.body
+  const { url } = req.body
 
   try {
-    new URL(uri)
+    new URL(url)
   } catch (e) {
-    return res.status(400).send('uri is not valid')
+    return res.status(400).send('url is not valid')
   }
 
-  const readStream = await fetch(uri).then(r => Stream.Readable.fromWeb(r.body as WebReadableStream));
+  const readStream = await fetch(url).then(r => Stream.Readable.fromWeb(r.body as WebReadableStream));
 
   const parser = parse({
     delimiter: ',',
