@@ -106,6 +106,7 @@ router.post('/send', async (req, res) => {
         },
       })
       if (!response.ok) {
+        console.warn('Error', response.status, response.statusText)
         errors.push({
           status: response.status,
           body: await response.text(),
