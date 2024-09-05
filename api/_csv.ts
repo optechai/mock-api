@@ -105,16 +105,24 @@ router.post('/send', async (req, res) => {
           authorization: req.headers.authorization,
         },
       })
-      console.log('response', response.status)
+      if (!response.ok) {
+        errors.push({
+          status: response.status,
+          body: await response.text(),
+        })
+      }
     } catch (e) {
-      errors.push(e)
+      errors.push({
+        status: 500,
+        body: e.message,
+      })
     }
   }
   if (errors.length) {
-    return res.status(400).send(errors)
+    return res.status(400).send({ message: 'error', errors })
   }
 
-  res.status(200).send({ message: 'success' })
+  res.status(200).send({ message: 'success', errors })
 })
 
 export default router
