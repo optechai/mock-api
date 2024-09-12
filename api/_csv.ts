@@ -56,7 +56,17 @@ router.post('/ingest', async (req, res) => {
       } else {
         this.push(',\n')
       }
-      this.push(JSON.stringify(chunk))
+      const obj = {}
+      for (const key in chunk) {
+        if (key.includes('.')) {
+          const [first, second] = key.split('.')
+          obj[first] = obj[first] || {}
+          obj[first][second] = chunk[key]
+        } else {
+          obj[key] = chunk[key]
+        }
+      }
+      this.push(JSON.stringify(obj))
       callback()
     },
   })
