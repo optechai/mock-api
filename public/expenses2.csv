@@ -1,4 +1,0 @@
-amount,category,currency,employment_id,expense_date,receipt.content,receipt.name,reviewed_at,reviewer_id,tax_amount,timezone,title
-8001,tech_equipment,EUR,f8901529-aa7b-441d-983f-12a7484bc99a,2020-12-11,UGVyaW9kIEVuZCBEYXRlLFBheSBEYXRlLEVtcG...5jZSBPZiBSZXNpZGVuYdXJyZW50LEFsbG93,receipt.pdf,2023-01-11T11:12:13Z,f8901529-aa7b-441d-983f-12a7484bc99a,0,Etc/UTC,new keyboard
-15000,office_supplies,USD,12345,2021-03-05,Q3VzdG9tZXIgU2VydmljZSBSZWNlaXB0IERhdGU...5zdG9tZXIgQWxsZXc=,receipt.pdf,2023-02-15T10:30:00Z,f8901529-aa7b-441d-983f-12a7484bc99a,200,America/New_York,printer paper
-12000,software,GBP,f8901529-aa7b-441d-983f-12a7484bc99a,2021-08-22,U29mdHdhcmUgU2VydmljZSBSZWNlaXB0IERhdGU...50LVNvZnR3YXJlLUFsbGV3,receipt.pdf,2023-03-22T09:45:00Z,f8901529-aa7b-441d-983f-12a7484bc99a,300,Europe/London,antivirus software
