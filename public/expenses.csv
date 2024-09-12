@@ -1,4 +1,4 @@
-amount,category,currency,employment_id,expense_date,receipt.content,receipt.name,tax_amount,timezone,title
-8001,tech_equipment,EUR,f5c9f85a-131a-4070-9c4a-42b0a79cc840,2024-07-11,UGVyaW9kIEVuZCBEYXRlLFBheSBEYXRlLEVtcG...5jZSBPZiBSZXNpZGVuYdXJyZW50LEFsbG93,receipt.pdf,0,Etc/UTC,new keyboard
-15000,other,USD,f5c9f85a-131a-4070-9c4a-42b0a79cc840,2024-03-05,Q3VzdG9tZXIgU2VydmljZSBSZWNlaXB0IERhdGU...5zdG9tZXIgQWxsZXc=,receipt.pdf,200,America/New_York,printer paper
-12000,travel,GBP,f5c9f85a-131a-4070-9c4a-42b0a79cc840,2024-08-22,U29mdHdhcmUgU2VydmljZSBSZWNlaXB0IERhdGU...50LVNvZnR3YXJlLUFsbGV3,receipt.pdf,300,Europe/London,antivirus software
+amount,category,currency,employment_id,expense_date,receipt.content,receipt.name,tax_amount,timezone,title,notes
+8001,tech_equipment,EUR,f5c9f85a-131a-4070-9c4a-42b0a79cc840,2024-07-11,UGVyaW9kIEVuZCBEYXRlLFBheSBEYXRlLEVtcG...5jZSBPZiBSZXNpZGVuYdXJyZW50LEFsbG93,receipt.pdf,0,Etc/UTC,new keyboard,Seems good
+15000,other,USD,f5c9f85a-131a-4070-9c4a-42b0a79cc840,2024-03-05,Q3VzdG9tZXIgU2VydmljZSBSZWNlaXB0IERhdGU...5zdG9tZXIgQWxsZXc=,receipt.pdf,200,America/New_York,printer paper,Seems good
+12000,travel,GBP,f5c9f85a-131a-4070-9c4a-42b0a79cc840,2024-08-22,U29mdHdhcmUgU2VydmljZSBSZWNlaXB0IERhdGU...50LVNvZnR3YXJlLUFsbGV3,receipt.pdf,300,Europe/London,antivirus software,Seems good
