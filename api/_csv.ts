@@ -31,6 +31,7 @@ router.post('/ingest', async (req, res) => {
   const parser = parse({
     delimiter: ',',
     columns: true,
+    cast: true,
   })
 
   res.writeHead(200, {
