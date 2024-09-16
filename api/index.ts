@@ -10,6 +10,7 @@ import familyRoute from './_family'
 import userRoute from './_user'
 import csvRoute from './_csv'
 import expensesRoute from './_expenses'
+import filesRoute from './_files'
 import webhookRoute from './webhook'
 import {
   checkFXConversion,
@@ -276,6 +277,7 @@ app.use('/api/family', familyRoute)
 app.use('/api/push', webhookRoute)
 app.use('/api/csv', csvRoute)
 app.use('/api/expenses', expensesRoute)
+app.use('/api/files', filesRoute)
 
 const port = process.env.PORT || 4000
 
