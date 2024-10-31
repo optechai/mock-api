@@ -279,7 +279,7 @@ app.use('/api/push', webhookRoute)
 app.use('/api/csv', csvRoute)
 app.use('/api/expenses', expensesRoute)
 app.use('/api/files', filesRoute)
-app.use('/api/token', sofiRoute)
+app.use('/api/sofi-token', sofiRoute)
 
 const port = process.env.PORT || 4000
 
