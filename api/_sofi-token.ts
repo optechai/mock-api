@@ -8,7 +8,7 @@ const loriSdk = new Lorikeet({
   clientSecret: process.env.SOFI_LORIKEET_CLIENT_SECRET,
 })
 
-router.post('/', async (req, res) => {
+router.get('/', async (_, res) => {
   const token = await loriSdk.token.create({
     remoteId: 'very-legit-unque-id',
     firstName: 'Lori',
