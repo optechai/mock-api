@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@lorikeetai/node-sdk':
     specifier: next
-    version: 0.1.0-alpha.11
+    version: 0.1.0-alpha.12
   csv-parse:
     specifier: ^5.5.6
     version: 5.5.6
@@ -317,8 +317,8 @@ packages:
       chalk: 4.1.2
     dev: true
 
-  /@lorikeetai/node-sdk@0.1.0-alpha.11:
-    resolution: {integrity: sha512-RedjX1XojaVa/idaG4sfDIjGXEJ6jtvjp91G4mhC0ozYUUDob8oS89ZLfbyXDY/0b8aMQfE8Dde1bvua4hZRHQ==}
+  /@lorikeetai/node-sdk@0.1.0-alpha.12:
+    resolution: {integrity: sha512-iOWOPkTpFRb+8LJIF1C0nZqLoF8MCeeXdUc3n41Ghg35skovtONct2ePYXFi+zJYEpUcpCQWKgXm4UIO1VacDg==}
     engines: {node: '>=20.9.0 <21.0.0', pnpm: '>=9.4.0'}
     dependencies:
       '@types/node': 20.16.1
