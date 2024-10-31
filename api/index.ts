@@ -19,7 +19,7 @@ import {
 
 const app = express()
 
-app.use('/sofi-f4745cd0-c9d0-434f-9017-cde95bcead41', express.static('sofi'))
+app.use('/sofi-f4745cd0-c9d0-434f-9017-cde95bcead41', express.static('public/sofi'))
 
 app.use(
   express.json({
