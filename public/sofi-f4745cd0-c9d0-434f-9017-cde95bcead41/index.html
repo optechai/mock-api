@@ -7,7 +7,12 @@
     <script type="module">
       import { lorikeet } from 'https://storage.googleapis.com/resources.lorikeetcx.ai/widget.js?mode=defer13&public_key=wk_ddeb4959-f76d-46c1-a3de-120f5bea8719'
 
-      lorikeet.init()
+      fetch('/sofi-token')
+        .then((res) => res.text())
+        .then((token) => {
+          lorikeet.init({ token })
+        })
+        .catch(console.warn)
     </script>
   </head>
   <body></body>
