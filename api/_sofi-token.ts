@@ -4,8 +4,8 @@ import { Lorikeet } from '@lorikeetai/node-sdk'
 const router = express.Router()
 
 const loriSdk = new Lorikeet({
-  clientId: process.env.SOFI_LORIKEET_API_KEY,
-  clientSecret: process.env.SOFI_LORIKEET_API_SECRET,
+  clientId: process.env.SOFI_LORIKEET_CLIENT_ID,
+  clientSecret: process.env.SOFI_LORIKEET_CLIENT_SECRET,
 })
 
 router.post('/', async (req, res) => {
