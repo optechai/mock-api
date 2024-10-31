@@ -87,7 +87,9 @@ router.post('/send', async (req, res) => {
     return res.status(400).send('body is required')
   }
 
-  const { body: { records } } = req
+  const {
+    body: { records },
+  } = req
 
   if (!records || !records.length) {
     return res.status(400).send('Records are required')
