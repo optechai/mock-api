@@ -2,12 +2,12 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Sofi sandbox</title>
+    <title>LaRe sandbox</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="module">
       import { lorikeet } from 'https://storage.googleapis.com/resources.lorikeetcx.ai/widget.js?mode=defer13&public_key=wk_ddeb4959-f76d-46c1-a3de-120f5bea8719'
 
-      fetch('/api/sofi-token')
+      fetch('/api/lare-token')
         .then((res) => res.text())
         .then((token) => {
           lorikeet.init({ token })

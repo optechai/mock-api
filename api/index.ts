@@ -11,7 +11,7 @@ import userRoute from './_user'
 import csvRoute from './_csv'
 import expensesRoute from './_expenses'
 import filesRoute from './_files'
-import sofiRoute from './_sofi-token'
+import laReRoute from './_lare-token'
 import webhookRoute from './webhook'
 import {
   checkFXConversion,
@@ -279,7 +279,7 @@ app.use('/api/push', webhookRoute)
 app.use('/api/csv', csvRoute)
 app.use('/api/expenses', expensesRoute)
 app.use('/api/files', filesRoute)
-app.use('/api/sofi-token', sofiRoute)
+app.use('/api/lare-token', laReRoute)
 
 const port = process.env.PORT || 4000
 
