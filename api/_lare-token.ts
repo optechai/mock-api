@@ -9,7 +9,7 @@ const loriSdk = new Lorikeet({
 })
 
 router.get('/', async (_, res) => {
-  const token = await loriSdk.token.create({
+  const token = await loriSdk.customer.token({
     remoteId: 'very-legit-unque-id',
     firstName: 'Lori',
     lastName: 'Customer',
