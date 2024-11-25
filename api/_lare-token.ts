@@ -10,7 +10,7 @@ const loriSdk = new Lorikeet({
 
 router.get('/', async (_, res) => {
   const token = await loriSdk.customer.token({
-    remoteId: 'very-legit-unque-id',
+    remoteId: 'very-legit-unique-id',
     firstName: 'Lori',
     lastName: 'Customer',
     email: 'al@optech.ai',

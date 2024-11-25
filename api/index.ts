@@ -29,6 +29,12 @@ app.use(
   }),
 )
 
+if (process.env.NODE_ENV === 'development') {
+  app.use(express.static(
+    'public'
+  ))
+}
+
 app.post('/api/sum', function (req, res) {
   console.log(`-------- POST /sum --------`)
   console.log('request headers', req.headers)
