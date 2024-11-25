@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Widget sandbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="module">
+        const getCookieValue = (name) => (
+            document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+        )
+
+        import { lorikeet } from 'http://localhost:5173/widget.js?mode=defer13'
+        const public_key = getCookieValue('public_key')
+        console.log('public_key is', public_key)
+        lorikeet.init({ public_key })
+    </script>
+</head>
+
+<body></body>
+
+</html>
