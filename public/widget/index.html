@@ -6,13 +6,11 @@
     <title>Widget sandbox</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="module">
-        const getCookieValue = (name) => (
-            document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
-        )
-
         import { lorikeet } from 'https://storage.googleapis.com/resources.lorikeetcx.ai/widget.js?mode=defer13'
-        const public_key = getCookieValue('public_key')
-        lorikeet.init({ public_key })
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const publicKey = urlParams.get('public_key')
+        lorikeet.init({ public_key: publicKey })
     </script>
 </head>
 
