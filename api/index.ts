@@ -12,6 +12,7 @@ import csvRoute from './_csv'
 import expensesRoute from './_expenses'
 import filesRoute from './_files'
 import laReRoute from './_lare-token'
+import formatDateRoute from './_format-time'
 import webhookRoute from './webhook'
 import {
   checkFXConversion,
@@ -286,6 +287,7 @@ app.use('/api/csv', csvRoute)
 app.use('/api/expenses', expensesRoute)
 app.use('/api/files', filesRoute)
 app.use('/api/lare-token', laReRoute)
+app.use('/api/format-date', formatDateRoute)
 
 const port = process.env.PORT || 4000
 
