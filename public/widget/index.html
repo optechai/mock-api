@@ -1,19 +1,40 @@
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Widget sandbox</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="module">
-        import { lorikeet } from 'https://storage.googleapis.com/resources.lorikeetcx.ai/widget.js?mode=defer13'
+      import { lorikeet } from 'https://storage.googleapis.com/resources.lorikeetcx.ai/widget.js?mode=defer13'
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const publicKey = urlParams.get('public_key')
-        lorikeet.init({ public_key: publicKey })
+      const urlParams = new URLSearchParams(window.location.search)
+      const publicKey =
+        urlParams.get('public_key') ||
+        document.cookie.replace(
+          /(?:(?:^|.*;\s*)lorikeet_public_key\s*=\s*([^;]*).*$)|^.*$/,
+          '$1',
+        )
+      const token =
+        urlParams.get('token') ||
+        document.cookie.replace(
+          /(?:(?:^|.*;\s*)lorikeet_token\s*=\s*([^;]*).*$)|^.*$/,
+          '$1',
+        )
+
+      if (!publicKey) {
+        throw new Error('Missing public key')
+      }
+      lorikeet.init({ public_key: publicKey, token })
+
+      if (publicKey) {
+        document.cookie = `lorikeet_public_key=${publicKey}`
+      }
+
+      if (token) {
+        document.cookie = `lorikeet_token=${token}`
+      }
     </script>
-</head>
+  </head>
 
-<body></body>
-
+  <body></body>
 </html>
