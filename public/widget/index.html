@@ -24,7 +24,7 @@
       if (!publicKey) {
         throw new Error('Missing public key')
       }
-      lorikeet.init({ public_key: publicKey, token })
+      lorikeet.init({ public_key: publicKey, token, default_open: true })
 
       if (publicKey) {
         document.cookie = `lorikeet_public_key=${publicKey}`
