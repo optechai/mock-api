@@ -3,11 +3,11 @@ import util from 'util'
 
 const app = express.Router()
 
-app.get('/getImmutableXTransaction', async function (req, res) {
+app.get('/immutable/transactions/:id', async function (req, res) {
   console.log('')
-  console.log('-------- GET /getImmutableTx --------')
+  console.log('-------- GET /immutable/transactions/:id --------')
   console.log('request headers', req.headers)
-  const transactionId = req.query.transactionId
+  const transactionId = req.params.id
   console.log('transactionId:', transactionId)
 
   const apisToQuery = {
