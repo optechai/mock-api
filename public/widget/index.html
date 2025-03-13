@@ -17,7 +17,7 @@
       const token =
         urlParams.get('token') ||
         document.cookie.replace(
-          /(?:(?:^|.*;\s*)lorikeet_token\s*=\s*([^;]*).*$)|^.*$/,
+          /(?:(?:^|.*;\s*)lorikeet_token_v2\s*=\s*([^;]*).*$)|^.*$/,
           '$1',
         )
 
@@ -31,7 +31,8 @@
       }
 
       if (token) {
-        document.cookie = `lorikeet_token=${token}`
+        // v2 because the old cookie is not correct
+        document.cookie = `lorikeet_token_v2=${token}`
       }
     </script>
   </head>
