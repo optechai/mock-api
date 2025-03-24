@@ -28,6 +28,9 @@ dependencies:
     version: 3.23.8
 
 devDependencies:
+  '@lorikeetai/web-sdk':
+    specifier: latest
+    version: 1.2.3
   '@types/express':
     specifier: ^5.0.0
     version: 5.0.0
@@ -330,6 +333,10 @@ packages:
     transitivePeerDependencies:
       - encoding
     dev: false
+
+  /@lorikeetai/web-sdk@1.2.3:
+    resolution: {integrity: sha512-FvMcD2QkstlNp6Ys8Pyyl7rPuDvzXQch4M9BLBLRZDoVbJSYZj2OG/RPgjqQgiG3rFwxc+EtJsiN93uVEK6BmQ==}
+    dev: true
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
