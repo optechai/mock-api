@@ -25,13 +25,13 @@ export type OptechRequest = z.infer<typeof RequestSchema>
 
 const router = express.Router()
 
-const WEBHOOK_HEADER_NAME = 'x-optech-webhook-signature'
+const WEBHOOK_HEADER_NAME = 'x-lorikeet-signature'
 
 // Swap YOUR_WEBHOOK_SIGNATURE_KEY below with your webhook signature key from:
 // https://app.optech.ai/integrations/webhooks
-const OPTECH_SHARED_SECRET =
+const LORIKEET_SHARED_SECRET =
   process.env.OPTECH_CLIENT_SECRET || 'YOUR_WEBHOOK_SIGNATURE_KEY'
-const OPTECH_CLIENT_ID = process.env.OPTECH_CLIENT_ID || 'opt_acb1234'
+const LORIKEET_CLIENT_ID = process.env.OPTECH_CLIENT_ID || 'opt_acb1234'
 
 /**
  * Use this to decode / validate the signature provided in the header
@@ -95,7 +95,7 @@ router.use((req, res, next) => {
     return
   }
 
-  const signature = generateSignature(rawRequestBody, OPTECH_SHARED_SECRET)
+  const signature = generateSignature(rawRequestBody, LORIKEET_SHARED_SECRET)
   const isValid = signature === req.headers[WEBHOOK_HEADER_NAME]
 
   if (!isValid) {
@@ -140,7 +140,7 @@ router.get('/validate', (req, res) => {
  * curl -X \
  * POST -H \
  * "content-type: application/json" -H \
- * "x-optech-webhook-signature: sha256 of the payload|PUBLIC_KEY
+ * "x-lorikeet-signature: sha256 of the payload|PUBLIC_KEY
  * -d '{
  * "link": "http://localhost:3000/ingest/1234",
  *  "data": {
@@ -172,14 +172,14 @@ router.post('/', async (req, res) => {
     const body = JSON.stringify({
       data: responseData,
     })
-    const signature = generateSignature(body, OPTECH_SHARED_SECRET)
+    const signature = generateSignature(body, LORIKEET_SHARED_SECRET)
     console.log('sending push request with', { body })
     await fetch(link, {
       method: 'POST',
       headers: {
         // for the data
         'Content-Type': 'application/json',
-        authorization: `Basic ${OPTECH_CLIENT_ID}`,
+        authorization: `Basic ${LORIKEET_CLIENT_ID}`,
         [WEBHOOK_HEADER_NAME]: signature,
       },
       body,
@@ -220,7 +220,7 @@ const requestMap = {
  * POST -H \
  * "content-type: application/json" -H \
  * "authorization: Basic OPTECH_CLIENT_ID" \
- * "x-optech-webhook-signature: sha256 of the payload
+ * "x-lorikeet-signature: sha256 of the payload
  * -d '{
  * "link": "http://localhost:3000/ingest/1234",
  *  "data": {
@@ -253,12 +253,12 @@ router.post('/immediate', async (req, res) => {
   })
   console.log('sending', body)
 
-  const signature = generateSignature(body, OPTECH_SHARED_SECRET)
+  const signature = generateSignature(body, LORIKEET_SHARED_SECRET)
 
   res
     .status(200)
     .header('Content-Type', 'application/json')
-    .header('authorization', `Basic ${OPTECH_CLIENT_ID}`)
+    .header('authorization', `Basic ${LORIKEET_CLIENT_ID}`)
     .header(WEBHOOK_HEADER_NAME, signature)
     .send(body)
 })
