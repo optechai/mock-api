@@ -18,7 +18,7 @@ const RequestSchema = z.object({
 })
 
 const API_URL = process.env.VERCEL_URL
-  ? 'https://template-api-integration.vercel.app'
+  ? 'https://mock.lorikeetcx.ai'
   : 'http://localhost:4000'
 
 export type OptechRequest = z.infer<typeof RequestSchema>
