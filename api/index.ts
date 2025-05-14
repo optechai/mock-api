@@ -15,6 +15,7 @@ import laReRoute from './_lare-token'
 import formatDateRoute from './_format-time'
 import shimsRoute from './_shims'
 import webhookRoute from './webhook'
+import possibleRoute from './_possible'
 import {
   checkFXConversion,
   CheckFXConversionResponse,
@@ -290,6 +291,7 @@ app.use('/api/files', filesRoute)
 app.use('/api/lare-token', laReRoute)
 app.use('/api/format-date', formatDateRoute)
 app.use('/api/shims', shimsRoute)
+app.use('/api/possible', possibleRoute)
 
 const port = process.env.PORT || 4000
 
