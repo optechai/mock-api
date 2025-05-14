@@ -38,6 +38,7 @@ class OktaTokenRetriever {
     const response = await fetch(url, { headers, method: "POST", body: JSON.stringify(payload) })
     console.log('authenticating: Got response from Okta', { response })
     const responseData = await response.json()
+    console.log('authenticating: Got response data from Okta', { responseData })
     return responseData.sessionToken
   }
 
@@ -56,7 +57,7 @@ class OktaTokenRetriever {
 
     url.search = params.toString()
 
-    const response = await fetch(url, { method: "GET" })
+    const response = await fetch(url.toString(), { method: "GET" })
     const location = response.headers.get("location")
     const fragment = location.split("#")[1]
     const fragmentParams = new URLSearchParams(fragment)
