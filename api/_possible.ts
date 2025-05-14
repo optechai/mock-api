@@ -45,17 +45,15 @@ class OktaTokenRetriever {
   static async authorize(sessionToken: string) {
     const url = new URL(`https://${OktaTokenRetriever.DOMAIN}/oauth2/v1/authorize`)
     console.log('authorizing: Fetching token from Okta')
-    const params = new URLSearchParams({
-      response_type: "id_token",
-      scope: "openid email",
-      state: randomUUID(),
-      nonce: randomUUID(),
-      client_id: OktaTokenRetriever.CLIENT_ID,
-      redirect_uri: OktaTokenRetriever.REDIRECT_URI,
-      sessionToken: sessionToken
-    })
 
-    url.search = params.toString()
+    url.searchParams.append("response_type", "id_token")
+    url.searchParams.append("scope", "openid email")
+    url.searchParams.append("state", randomUUID())
+    url.searchParams.append("nonce", randomUUID())
+    url.searchParams.append("client_id", OktaTokenRetriever.CLIENT_ID)
+    url.searchParams.append("redirect_uri", OktaTokenRetriever.REDIRECT_URI)
+    url.searchParams.append("sessionToken", sessionToken)
+    console.log('authorizing: Fetching token from Okta', { url: url.toString() })
 
     const response = await fetch(url.toString(), { method: "GET" })
     const location = response.headers.get("location")
