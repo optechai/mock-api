@@ -55,7 +55,7 @@ class OktaTokenRetriever {
     url.searchParams.append("sessionToken", sessionToken)
     console.log('authorizing: Fetching token from Okta', { url: url.toString() })
 
-    const response = await fetch(url.toString(), { method: "GET" })
+    const response = await fetch(url.toString(), { method: "GET", redirect: 'manual' })
     const location = response.headers.get("location")
     const fragment = location.split("#")[1]
     const fragmentParams = new URLSearchParams(fragment)
