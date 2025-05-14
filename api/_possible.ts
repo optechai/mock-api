@@ -20,7 +20,7 @@ export default app
 class OktaTokenRetriever {
   static DOMAIN = "possiblefinance.okta.com"
   static CLIENT_ID = "0oa25rmt7vsu1D7oT5d7"
-  static REDIRECT_URI = "http://localhost:3000/okta"
+  static REDIRECT_URI = "https://localhost:3000/okta"
   static USERNAME = "ai.agent@possiblefinance.com"
   static PASSWORD = process.env.POSSIBLE_OKTA_PASSWORD
 
