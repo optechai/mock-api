@@ -9,7 +9,6 @@ const app = express.Router()
 app.post('/', async function (req, res) {
   console.log('-------- POST /possible --------')
   console.log('request headers', req.headers)
-  console.log('request body', req.body)
   const idToken = await OktaTokenRetriever.getIdToken()
   res.send({ token: idToken })
 })
@@ -35,14 +34,16 @@ class OktaTokenRetriever {
       username: OktaTokenRetriever.USERNAME,
       password: OktaTokenRetriever.PASSWORD
     }
+    console.log('authenticating: Fetching token from Okta')
     const response = await fetch(url, { headers, method: "POST", body: JSON.stringify(payload) })
+    console.log('authenticating: Got response from Okta', { response })
     const responseData = await response.json()
     return responseData.sessionToken
   }
 
   static async authorize(sessionToken: string) {
     const url = new URL(`https://${OktaTokenRetriever.DOMAIN}/oauth2/v1/authorize`)
-
+    console.log('authorizing: Fetching token from Okta')
     const params = new URLSearchParams({
       response_type: "id_token",
       scope: "openid email",
