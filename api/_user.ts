@@ -174,6 +174,35 @@ app.get('/orders', function (req, res) {
   res.send(response)
 })
 
+/**
+ * Current appointments for the user
+ */
+app.get('/appointments/current', function (req, res) {
+  console.log('')
+  console.log('-------- GET /user/appointments/current --------')
+  console.log('request headers', req.headers)
+  // current date + 1 week
+  const date = new Date()
+  date.setDate(date.getDate() + 7)
+  date.setHours(9, 0, 0, 0)
+  const response = {
+    appointments: [
+      {
+        id: '1',
+        date: date,
+      },
+    ],
+  }
+  console.log(
+    'response body',
+    util.inspect(response, false, null, true /* enable colors */),
+  )
+  res.send(response)
+})
+
+/**
+ * Available appointments for the user
+ */
 app.get('/appointments', function (req, res) {
   console.log('')
   console.log('-------- GET /user/appointments --------')
