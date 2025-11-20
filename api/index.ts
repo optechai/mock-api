@@ -38,6 +38,28 @@ if (process.env.NODE_ENV === 'development') {
   ))
 }
 
+app.get('/api/dev/demo', (req, res) => {
+  console.log('-------- GET /api/dev/demo --------')
+  res.send({
+    data: {
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '1234567890',
+    }
+  })
+})
+
+app.get('/api/prod/demo', (req, res) => {
+  console.log('-------- GET /api/prod/demo --------')
+  res.send({
+    data: {
+      name: 'Jane Doe',
+      email: 'jane.doe@acme.com',
+      phone: '16025559397',
+    }
+  })
+})
+
 app.post('/api/sum', function (req, res) {
   console.log(`-------- POST /sum --------`)
   console.log('request headers', req.headers)
