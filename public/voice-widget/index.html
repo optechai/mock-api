@@ -1,0 +1,31 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Voice widget sandbox</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script type="module">
+    import { voiceWidget } from 'https://storage.googleapis.com/resources.lorikeetcx.ai/voice-widget.js'
+
+    const urlParams = new URLSearchParams(window.location.search)
+    const publicKey =
+      urlParams.get('public_key') ||
+      document.cookie.replace(
+        /(?:(?:^|.*;\s*)lorikeet_voice_public_key\s*=\s*([^;]*).*$)|^.*$/,
+        '$1',
+      )
+
+    if (!publicKey) {
+      throw new Error('Missing public key')
+    }
+    voiceWidget.init({ public_key: publicKey, anonymous: true })
+    voiceWidget.open()
+
+    document.cookie = `lorikeet_voice_public_key=${publicKey}`
+  </script>
+</head>
+
+<body></body>
+
+</html>
